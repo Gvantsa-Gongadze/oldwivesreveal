@@ -351,6 +351,10 @@ body {
   letter-spacing: 0.05em;
   text-align: right;
 }
+
+.history-row .result-tag {
+  text-align: center;
+}
 .result-tag.boy {
   color: var(--father-bright);
 }
@@ -383,7 +387,7 @@ body {
 
 .window-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 64px 1fr auto;
   gap: 12px;
   align-items: center;
   font-family: var(--font-mono);
@@ -400,7 +404,7 @@ body {
 }
 
 .window-row .result-tag {
-  text-align: left;
+  text-align: center;
 }
 
 .window-row.current {
