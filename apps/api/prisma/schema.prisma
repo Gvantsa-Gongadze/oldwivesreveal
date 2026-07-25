@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Reveal {
+  id String @id @default(cuid())
+
+  fatherBirthDate DateTime @db.Date
+  motherBirthDate DateTime @db.Date
+  reckonDate      DateTime @db.Date
+
+  fatherRemainderYears Float
+  fatherAngleDeg       Float
+  fatherAgeYears       Float
+
+  motherRemainderYears Float
+  motherAngleDeg       Float
+  motherAgeYears       Float
+
+  newerParent String // "father" | "mother" | "tie"
+  motherOlder Boolean
+  result      String // "BOY" | "GIRL" | "TIE"
+
+  createdAt DateTime @default(now())
+
+  @@map("reveals")
+}

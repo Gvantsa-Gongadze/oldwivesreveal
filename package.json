@@ -1,0 +1,13 @@
+{
+  "name": "oldwivesreveal",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev:api": "pnpm --filter api dev",
+    "dev:web": "pnpm --filter web dev",
+    "build": "pnpm --filter @oldwivesreveal/shared-types build && pnpm --filter api build && pnpm --filter web build",
+    "prisma:generate": "pnpm --filter api prisma:generate",
+    "prisma:migrate": "pnpm --filter api prisma:migrate"
+  }
+}
