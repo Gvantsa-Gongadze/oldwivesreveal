@@ -112,3 +112,88 @@ export function calculateReveal(input: CreateRevealRequest): Omit<Reveal, 'id' |
     result,
   };
 }
+
+export interface ResultWindow {
+  /** ISO date, inclusive start of this window. */
+  from: string;
+  /** ISO date, exclusive end of this window (start of the next one). */
+  to: string;
+  result: RevealResult;
+}
+
+function addCalendarYears(date: Date, years: number): Date {
+  const next = new Date(date.getTime());
+  next.setUTCFullYear(next.getUTCFullYear() + years);
+  return next;
+}
+
+function wholeCyclesElapsed(birth: Date, from: Date, cycleYears: number): number {
+  let years = from.getUTCFullYear() - birth.getUTCFullYear();
+  const beforeAnniversary =
+    from.getUTCMonth() < birth.getUTCMonth() ||
+    (from.getUTCMonth() === birth.getUTCMonth() && from.getUTCDate() < birth.getUTCDate());
+  if (beforeAnniversary) {
+    years -= 1;
+  }
+  return Math.floor(years / cycleYears);
+}
+
+function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+/**
+ * The reading only ever flips on a parent's cycle anniversary (both ages
+ * advance at the same rate, so the gap between them is flat in between),
+ * which means the timeline splits cleanly into BOY/GIRL/TIE stretches
+ * bounded by whichever parent's renewal date comes next. This walks that
+ * timeline forward from `options.from`.
+ */
+export function buildResultWindows(
+  input: Pick<CreateRevealRequest, 'fatherBirthDate' | 'motherBirthDate'>,
+  options: { from?: string; windowCount?: number } = {},
+): ResultWindow[] {
+  const fatherBirth = parseIsoDate(input.fatherBirthDate);
+  const motherBirth = parseIsoDate(input.motherBirthDate);
+  const from = options.from ? parseIsoDate(options.from) : new Date();
+  const windowCount = Math.min(Math.max(options.windowCount ?? 6, 1), 24);
+
+  if (from < fatherBirth || from < motherBirth) {
+    throw new Error('Reference date falls before a birth date.');
+  }
+
+  let fatherCycles = wholeCyclesElapsed(fatherBirth, from, FATHER_CYCLE_YEARS);
+  let motherCycles = wholeCyclesElapsed(motherBirth, from, MOTHER_CYCLE_YEARS);
+
+  const prevFatherEvent = addCalendarYears(fatherBirth, fatherCycles * FATHER_CYCLE_YEARS);
+  const prevMotherEvent = addCalendarYears(motherBirth, motherCycles * MOTHER_CYCLE_YEARS);
+  let windowStart = prevFatherEvent > prevMotherEvent ? prevFatherEvent : prevMotherEvent;
+  let nextFatherEvent = addCalendarYears(fatherBirth, (fatherCycles + 1) * FATHER_CYCLE_YEARS);
+  let nextMotherEvent = addCalendarYears(motherBirth, (motherCycles + 1) * MOTHER_CYCLE_YEARS);
+
+  const windows: ResultWindow[] = [];
+  for (let i = 0; i < windowCount; i++) {
+    const windowEnd = nextFatherEvent < nextMotherEvent ? nextFatherEvent : nextMotherEvent;
+    const midpoint = new Date((windowStart.getTime() + windowEnd.getTime()) / 2);
+
+    const { result } = calculateReveal({
+      fatherBirthDate: input.fatherBirthDate,
+      motherBirthDate: input.motherBirthDate,
+      reckonDate: toIsoDate(midpoint),
+    });
+
+    windows.push({ from: toIsoDate(windowStart), to: toIsoDate(windowEnd), result });
+
+    if (nextFatherEvent.getTime() === windowEnd.getTime()) {
+      fatherCycles += 1;
+      nextFatherEvent = addCalendarYears(fatherBirth, (fatherCycles + 1) * FATHER_CYCLE_YEARS);
+    }
+    if (nextMotherEvent.getTime() === windowEnd.getTime()) {
+      motherCycles += 1;
+      nextMotherEvent = addCalendarYears(motherBirth, (motherCycles + 1) * MOTHER_CYCLE_YEARS);
+    }
+    windowStart = windowEnd;
+  }
+
+  return windows;
+}

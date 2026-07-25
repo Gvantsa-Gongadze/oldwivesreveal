@@ -3,6 +3,7 @@ import type { Reveal } from '@oldwivesreveal/shared-types';
 import { RevealForm } from './components/RevealForm';
 import { CycleDial } from './components/CycleDial';
 import { VerdictCard } from './components/VerdictCard';
+import { ResultWindows } from './components/ResultWindows';
 import { HistoryList } from './components/HistoryList';
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
           </section>
 
           <VerdictCard reveal={reveal} />
+          <ResultWindows reveal={reveal} />
         </>
       ) : null}
 
