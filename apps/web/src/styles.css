@@ -148,7 +148,16 @@ body {
   color: var(--gold-dim);
 }
 
-.field input[type='date'] {
+.date-picker {
+  position: relative;
+}
+
+.date-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 15px;
   padding: 9px 10px;
@@ -158,12 +167,178 @@ body {
   color: var(--ink-text);
   outline: none;
   border-radius: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
-.field input[type='date']:focus-visible {
+.date-trigger-placeholder {
+  color: rgba(10, 30, 36, 0.4);
+}
+
+.date-trigger:focus-visible {
   outline: 2px solid var(--blood);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+.date-trigger-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--gold-dim);
+}
+
+.date-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  width: 260px;
+  background: var(--parchment);
+  border: 1px solid var(--parchment-2);
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  padding: 14px;
+  color: var(--ink-text);
+  animation: pop-in 160ms ease both;
+}
+
+.date-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.date-nav-btn {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 140ms ease;
+}
+
+.date-nav-btn:hover {
+  background: var(--parchment-2);
+}
+
+.date-header-label {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  background: none;
+  border: none;
+  color: var(--ink-text);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.date-header-label:hover {
+  background: var(--parchment-2);
+}
+
+.date-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.date-weekdays span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--gold-dim);
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.date-cell {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: none;
+  border: none;
+  color: var(--ink-text);
+  padding: 6px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.date-cell:hover {
+  background: var(--parchment-2);
+}
+
+.date-cell.outside {
+  color: rgba(10, 30, 36, 0.35);
+}
+
+.date-cell.today {
+  color: var(--blood);
+  font-weight: 600;
+}
+
+.date-cell.selected {
+  background: var(--blood);
+  color: var(--parchment);
+  font-weight: 600;
+}
+
+.date-popover-footer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.date-today-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  cursor: pointer;
+}
+
+.date-today-btn:hover {
+  text-decoration: underline;
+}
+
+.date-year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.date-year-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: none;
+  border: none;
+  color: var(--ink-text);
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.date-year-cell:hover {
+  background: var(--parchment-2);
+}
+
+.date-year-cell.selected {
+  background: var(--blood);
+  color: var(--parchment);
+  font-weight: 600;
 }
 
 .primary-button {
