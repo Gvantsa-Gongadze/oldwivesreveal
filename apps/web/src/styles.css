@@ -1,17 +1,17 @@
 :root {
-  --ink: #12281a;
-  --ink-2: #2d7a4d;
-  --parchment: #f5f7de;
-  --parchment-2: #e7ebc0;
-  --blood: #e63450;
-  --blood-bright: #f06482;
-  --gold: #f2cf4a;
-  --gold-dim: #96780c;
-  --father: #55759f;
-  --father-bright: #6c8cbf;
-  --mother: #b93a8d;
-  --mother-bright: #e066c0;
-  --ink-text: #0e2015;
+  --ink: #1c4753;
+  --ink-2: #3d92ac;
+  --parchment: #f6eceb;
+  --parchment-2: #ebd9d8;
+  --blood: #9e3a46;
+  --blood-bright: #e8637c;
+  --gold: #c7adac;
+  --gold-dim: #6e5655;
+  --father: #2e7c96;
+  --father-bright: #8d9baa;
+  --mother: #c93f5c;
+  --mother-bright: #efa294;
+  --ink-text: #0a1e24;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
@@ -30,11 +30,11 @@ body,
 }
 
 body {
-  background: radial-gradient(1px 1px at 10% 20%, rgba(245, 247, 222, 0.35), transparent),
-    radial-gradient(1px 1px at 80% 10%, rgba(245, 247, 222, 0.25), transparent),
-    radial-gradient(1px 1px at 60% 70%, rgba(245, 247, 222, 0.3), transparent),
-    radial-gradient(1px 1px at 30% 85%, rgba(245, 247, 222, 0.2), transparent),
-    radial-gradient(1px 1px at 90% 60%, rgba(245, 247, 222, 0.25), transparent),
+  background: radial-gradient(1px 1px at 10% 20%, rgba(246, 236, 235, 0.35), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(246, 236, 235, 0.25), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(246, 236, 235, 0.3), transparent),
+    radial-gradient(1px 1px at 30% 85%, rgba(246, 236, 235, 0.2), transparent),
+    radial-gradient(1px 1px at 90% 60%, rgba(246, 236, 235, 0.25), transparent),
     radial-gradient(1200px 600px at 50% -10%, var(--ink-2), var(--ink) 70%);
   background-color: var(--ink);
   color: var(--parchment);
@@ -55,9 +55,10 @@ body {
 
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  color: var(--gold);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: #ddc9c8;
   margin: 0 0 14px;
   text-transform: uppercase;
 }
@@ -73,7 +74,7 @@ body {
 .lede {
   font-size: 15.5px;
   line-height: 1.65;
-  color: rgba(245, 247, 222, 0.75);
+  color: rgba(246, 236, 235, 0.75);
   max-width: 520px;
   margin: 0 auto;
 }
@@ -143,7 +144,7 @@ body {
   font-weight: 600;
   font-size: 14.5px;
   letter-spacing: 0.01em;
-  color: var(--ink-text);
+  color: var(--parchment);
   background: var(--blood);
   border: none;
   padding: 12px 22px;
@@ -156,7 +157,7 @@ body {
 .primary-button:hover:not(:disabled) {
   background: var(--blood-bright);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 22px rgba(230, 52, 80, 0.4);
+  box-shadow: 0 10px 22px rgba(158, 58, 70, 0.4);
 }
 .primary-button:active {
   transform: translateY(1px) scale(0.98);
@@ -207,11 +208,11 @@ body {
 
 .ring-track {
   fill: none;
-  stroke: rgba(242, 207, 74, 0.28);
+  stroke: rgba(199, 173, 172, 0.28);
   stroke-width: 2;
 }
 .ring-tick {
-  stroke: rgba(245, 247, 222, 0.35);
+  stroke: rgba(246, 236, 235, 0.35);
   stroke-width: 1.5;
 }
 .ring-hand {
@@ -243,7 +244,7 @@ body {
 .dial-meta {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: rgba(245, 247, 222, 0.65);
+  color: rgba(246, 236, 235, 0.8);
   margin: 0;
 }
 
@@ -259,12 +260,13 @@ body {
   background: var(--parchment);
   color: var(--ink-text);
   border-radius: 10px;
-  margin-top: 40px;
+  margin: 40px auto 0;
   padding: 30px 30px 26px;
   text-align: center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
   border: 1px solid var(--parchment-2);
   animation: pop-in 560ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  max-width: 480px;
 }
 
 .verdict-eyebrow {
@@ -325,13 +327,13 @@ body {
   font-family: var(--font-mono);
   font-size: 12.5px;
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(242, 207, 74, 0.2);
+  border-bottom: 1px solid rgba(199, 173, 172, 0.2);
   border-radius: 4px;
   transition: background 160ms ease, transform 160ms ease;
 }
 
 .history-row:hover {
-  background: rgba(242, 207, 74, 0.08);
+  background: rgba(199, 173, 172, 0.08);
   transform: translateX(3px);
 }
 
@@ -378,13 +380,13 @@ body {
   font-family: var(--font-mono);
   font-size: 12.5px;
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(242, 207, 74, 0.2);
+  border-bottom: 1px solid rgba(199, 173, 172, 0.2);
   border-radius: 4px;
   transition: background 160ms ease, transform 160ms ease;
 }
 
 .window-row:hover {
-  background: rgba(242, 207, 74, 0.08);
+  background: rgba(199, 173, 172, 0.08);
   transform: translateX(3px);
 }
 
@@ -393,12 +395,12 @@ body {
 }
 
 .window-row.current {
-  background: rgba(242, 207, 74, 0.1);
+  background: rgba(199, 173, 172, 0.1);
   border-left: 2px solid var(--gold);
 }
 
 .window-range {
-  color: rgba(245, 247, 222, 0.75);
+  color: rgba(246, 236, 235, 0.75);
 }
 
 .window-now {
@@ -414,7 +416,7 @@ body {
   text-align: center;
   font-size: 12.5px;
   line-height: 1.6;
-  color: rgba(245, 247, 222, 0.5);
+  color: rgba(246, 236, 235, 0.7);
   font-style: italic;
   max-width: 520px;
   margin-left: auto;
