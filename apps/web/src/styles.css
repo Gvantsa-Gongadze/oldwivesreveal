@@ -1,17 +1,17 @@
 :root {
-  --ink: #11152a;
-  --ink-2: #1a2040;
-  --parchment: #efe7d6;
-  --parchment-2: #e4d9c0;
-  --blood: #9c2b3c;
-  --blood-bright: #c8455a;
-  --gold: #c6a15b;
-  --gold-dim: #8d7745;
-  --father: #4c6b8a;
-  --father-bright: #7ea0c4;
-  --mother: #b0576b;
-  --mother-bright: #de8399;
-  --ink-text: #2a2618;
+  --ink: #223a3f;
+  --ink-2: #2c525c;
+  --parchment: #e1eae3;
+  --parchment-2: #c7ddcb;
+  --blood: #2f9e5c;
+  --blood-bright: #3dcf74;
+  --gold: #f7c548;
+  --gold-dim: #c99a2e;
+  --father: #1fa8bd;
+  --father-bright: #5fe0f0;
+  --mother: #ec9a2e;
+  --mother-bright: #ffc45c;
+  --ink-text: #1c2c2f;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
@@ -30,11 +30,11 @@ body,
 }
 
 body {
-  background: radial-gradient(1px 1px at 10% 20%, rgba(239, 231, 214, 0.35), transparent),
-    radial-gradient(1px 1px at 80% 10%, rgba(239, 231, 214, 0.25), transparent),
-    radial-gradient(1px 1px at 60% 70%, rgba(239, 231, 214, 0.3), transparent),
-    radial-gradient(1px 1px at 30% 85%, rgba(239, 231, 214, 0.2), transparent),
-    radial-gradient(1px 1px at 90% 60%, rgba(239, 231, 214, 0.25), transparent),
+  background: radial-gradient(1px 1px at 10% 20%, rgba(225, 234, 227, 0.35), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(225, 234, 227, 0.25), transparent),
+    radial-gradient(1px 1px at 60% 70%, rgba(225, 234, 227, 0.3), transparent),
+    radial-gradient(1px 1px at 30% 85%, rgba(225, 234, 227, 0.2), transparent),
+    radial-gradient(1px 1px at 90% 60%, rgba(225, 234, 227, 0.25), transparent),
     radial-gradient(1200px 600px at 50% -10%, var(--ink-2), var(--ink) 70%);
   background-color: var(--ink);
   color: var(--parchment);
@@ -73,7 +73,7 @@ body {
 .lede {
   font-size: 15.5px;
   line-height: 1.65;
-  color: rgba(239, 231, 214, 0.75);
+  color: rgba(225, 234, 227, 0.75);
   max-width: 520px;
   margin: 0 auto;
 }
@@ -81,7 +81,7 @@ body {
 .ledger-card {
   background: var(--parchment);
   color: var(--ink-text);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 28px 28px 26px;
   display: flex;
   flex-wrap: wrap;
@@ -130,21 +130,24 @@ body {
   font-weight: 600;
   font-size: 14.5px;
   letter-spacing: 0.01em;
-  color: var(--parchment);
+  color: var(--ink-text);
   background: var(--blood);
   border: none;
   padding: 12px 22px;
-  border-radius: 3px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 160ms ease, transform 160ms ease;
+  transition: background 160ms ease, transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease;
   flex: 0 0 auto;
 }
 
 .primary-button:hover {
   background: var(--blood-bright);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(47, 158, 92, 0.4);
 }
 .primary-button:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: none;
 }
 .primary-button:disabled {
   opacity: 0.6;
@@ -169,12 +172,18 @@ body {
   justify-content: center;
   gap: 18px;
   margin-top: 44px;
+  animation: pop-in 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .dial-wrap {
   flex: 1 1 220px;
   max-width: 260px;
   text-align: center;
+  transition: transform 220ms ease;
+}
+
+.dial-wrap:hover {
+  transform: translateY(-4px);
 }
 
 .dial-wrap svg {
@@ -185,11 +194,11 @@ body {
 
 .ring-track {
   fill: none;
-  stroke: rgba(198, 161, 91, 0.28);
+  stroke: rgba(247, 197, 72, 0.28);
   stroke-width: 2;
 }
 .ring-tick {
-  stroke: rgba(239, 231, 214, 0.35);
+  stroke: rgba(225, 234, 227, 0.35);
   stroke-width: 1.5;
 }
 .ring-hand {
@@ -206,6 +215,7 @@ body {
 
 .dial-wrap.winner .ring-track {
   stroke: var(--gold);
+  animation: ring-pulse 1.6s ease-in-out infinite;
 }
 .dial-wrap.dim {
   opacity: 0.55;
@@ -220,7 +230,7 @@ body {
 .dial-meta {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: rgba(239, 231, 214, 0.65);
+  color: rgba(225, 234, 227, 0.65);
   margin: 0;
 }
 
@@ -235,12 +245,13 @@ body {
 .verdict-card {
   background: var(--parchment);
   color: var(--ink-text);
-  border-radius: 4px;
+  border-radius: 10px;
   margin-top: 40px;
   padding: 30px 30px 26px;
   text-align: center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
   border: 1px solid var(--parchment-2);
+  animation: pop-in 560ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 
 .verdict-eyebrow {
@@ -279,7 +290,7 @@ body {
   margin: 0 auto;
   max-width: 460px;
   white-space: pre-wrap;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .history {
@@ -301,7 +312,14 @@ body {
   font-family: var(--font-mono);
   font-size: 12.5px;
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(198, 161, 91, 0.2);
+  border-bottom: 1px solid rgba(247, 197, 72, 0.2);
+  border-radius: 4px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.history-row:hover {
+  background: rgba(247, 197, 72, 0.08);
+  transform: translateX(3px);
 }
 
 .history-row .result-tag {
@@ -324,7 +342,7 @@ body {
   text-align: center;
   font-size: 12.5px;
   line-height: 1.6;
-  color: rgba(239, 231, 214, 0.5);
+  color: rgba(225, 234, 227, 0.5);
   font-style: italic;
   max-width: 520px;
   margin-left: auto;
@@ -347,8 +365,44 @@ body {
   }
 }
 
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ring-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    stroke-width: 2;
+  }
+  50% {
+    opacity: 0.55;
+    stroke-width: 3.4;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ring-hand {
     transition: none;
+  }
+  .dials,
+  .verdict-card {
+    animation: none;
+  }
+  .dial-wrap.winner .ring-track {
+    animation: none;
+  }
+  .dial-wrap:hover {
+    transform: none;
+  }
+  .primary-button:hover {
+    transform: none;
   }
 }
