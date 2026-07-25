@@ -19,6 +19,7 @@ export function HistoryList() {
         <div className="history-row" key={reveal.id}>
           <span>Father {formatDate(reveal.fatherBirthDate)}</span>
           <span>Mother {formatDate(reveal.motherBirthDate)}</span>
+          <span>Reckoned {formatDate(reveal.reckonDate)}</span>
           <span className={`result-tag ${reveal.result.toLowerCase()}`}>{reveal.result}</span>
         </div>
       ))}

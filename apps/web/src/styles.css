@@ -321,7 +321,7 @@ body {
 
 .history-row {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 64px;
   gap: 10px;
   align-items: center;
   font-family: var(--font-mono);
@@ -330,6 +330,15 @@ body {
   border-bottom: 1px solid rgba(199, 173, 172, 0.2);
   border-radius: 4px;
   transition: background 160ms ease, transform 160ms ease;
+}
+
+.history-row span:not(.result-tag) {
+  text-align: left;
+}
+
+.history-row > *:not(:first-child) {
+  border-left: 1px solid rgba(199, 173, 172, 0.35);
+  padding-left: 14px;
 }
 
 .history-row:hover {
@@ -436,6 +445,10 @@ body {
   }
   .history-row .result-tag {
     text-align: left;
+  }
+  .history-row > *:not(:first-child) {
+    border-left: none;
+    padding-left: 0;
   }
   .window-row {
     grid-template-columns: auto 1fr;
