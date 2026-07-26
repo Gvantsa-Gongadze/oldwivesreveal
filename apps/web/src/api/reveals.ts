@@ -1,4 +1,5 @@
 import type { CreateRevealRequest, Reveal } from '@oldwivesreveal/shared-types';
+import { getClientId } from '../lib/clientId';
 
 const BASE_URL = '/api/reveals';
 
@@ -14,14 +15,16 @@ async function parseJsonOrThrow(response: Response) {
 export async function createReveal(input: CreateRevealRequest): Promise<Reveal> {
   const response = await fetch(BASE_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-Client-Id': getClientId() },
     body: JSON.stringify(input),
   });
   return parseJsonOrThrow(response);
 }
 
 export async function listReveals(limit = 10): Promise<Reveal[]> {
-  const response = await fetch(`${BASE_URL}?limit=${limit}`);
+  const response = await fetch(`${BASE_URL}?limit=${limit}`, {
+    headers: { 'X-Client-Id': getClientId() },
+  });
   return parseJsonOrThrow(response);
 }
 

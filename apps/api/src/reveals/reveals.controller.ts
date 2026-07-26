@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Headers, NotFoundException, Param, Post, Query } from '@nestjs/common';
 import { RevealsService } from './reveals.service';
 import { CreateRevealDto } from './dto/create-reveal.dto';
 
@@ -7,13 +7,13 @@ export class RevealsController {
   constructor(private readonly revealsService: RevealsService) {}
 
   @Post()
-  create(@Body() dto: CreateRevealDto) {
-    return this.revealsService.create(dto);
+  create(@Body() dto: CreateRevealDto, @Headers('x-client-id') clientId?: string) {
+    return this.revealsService.create(dto, clientId ?? null);
   }
 
   @Get()
-  findAll(@Query('limit') limit?: string) {
-    return this.revealsService.findAll(limit ? Number(limit) : undefined);
+  findAll(@Query('limit') limit?: string, @Headers('x-client-id') clientId?: string) {
+    return this.revealsService.findAll(clientId ?? null, limit ? Number(limit) : undefined);
   }
 
   @Get(':id')

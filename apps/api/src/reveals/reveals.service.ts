@@ -36,7 +36,7 @@ function toReveal(record: RevealRecord): Reveal {
 export class RevealsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(input: CreateRevealRequest): Promise<Reveal> {
+  async create(input: CreateRevealRequest, clientId: string | null): Promise<Reveal> {
     let outcome;
     try {
       outcome = calculateReveal(input);
@@ -46,6 +46,7 @@ export class RevealsService {
 
     const record = await this.prisma.reveal.create({
       data: {
+        clientId,
         fatherBirthDate: new Date(`${input.fatherBirthDate}T00:00:00Z`),
         motherBirthDate: new Date(`${input.motherBirthDate}T00:00:00Z`),
         reckonDate: new Date(`${input.reckonDate}T00:00:00Z`),
@@ -64,8 +65,12 @@ export class RevealsService {
     return toReveal(record);
   }
 
-  async findAll(limit = 25): Promise<Reveal[]> {
+  async findAll(clientId: string | null, limit = 25): Promise<Reveal[]> {
+    if (!clientId) {
+      return [];
+    }
     const records = await this.prisma.reveal.findMany({
+      where: { clientId },
       orderBy: { createdAt: 'desc' },
       take: Math.min(Math.max(limit, 1), 100),
     });

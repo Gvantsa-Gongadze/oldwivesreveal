@@ -10,6 +10,12 @@ datasource db {
 model Reveal {
   id String @id @default(cuid())
 
+  /// Anonymous per-device id (see apps/web/src/lib/clientId.ts). Scopes the
+  /// history list to "your" reveals; null for reveals created without one.
+  /// Individual reveals stay fetchable by id regardless, since that's the
+  /// shareable-link mechanism.
+  clientId String? @db.VarChar(64)
+
   fatherBirthDate DateTime @db.Date
   motherBirthDate DateTime @db.Date
   reckonDate      DateTime @db.Date
@@ -28,5 +34,6 @@ model Reveal {
 
   createdAt DateTime @default(now())
 
+  @@index([clientId])
   @@map("reveals")
 }
