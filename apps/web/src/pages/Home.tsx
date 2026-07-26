@@ -21,9 +21,10 @@ export function Home() {
           <Link to="/home">Old Wives' Reveal</Link>
         </h1>
         <p className="lede">
-          Old wisdom holds a father renews every four years, a mother every three. Whichever is freshest at the
-          reckoning is said to be the one the child favors.
+          A folk method for guessing boy or girl. Old wisdom holds a father renews every four years, a mother every
+          three — whichever is freshest at the reckoning is said to be the one the child favors.
         </p>
+        <p className="hero-disclaimer">Just for fun, not medicine — a baby's sex is set at conception either way.</p>
       </header>
 
       <nav className="page-nav">

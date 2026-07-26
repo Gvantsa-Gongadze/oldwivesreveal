@@ -106,6 +106,14 @@ body {
   margin: 0 auto;
 }
 
+.hero-disclaimer {
+  font-size: 12.5px;
+  font-style: italic;
+  color: rgba(246, 236, 235, 0.55);
+  max-width: 420px;
+  margin: 12px auto 0;
+}
+
 .ledger-card {
   background: var(--parchment);
   color: var(--ink-text);
