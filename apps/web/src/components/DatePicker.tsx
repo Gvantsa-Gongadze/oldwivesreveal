@@ -163,7 +163,7 @@ export function DatePicker({ id, value, onChange }: DatePickerProps) {
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >
-        <span className={selected ? '' : 'date-trigger-placeholder'}>{selected ? formatDisplay(selected) : 'dd.mm.yyyy'}</span>
+        <span>{selected ? formatDisplay(selected) : 'dd.mm.yyyy'}</span>
         <svg className="date-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="5" width="18" height="16" rx="2" />
           <line x1="16" y1="3" x2="16" y2="7" />

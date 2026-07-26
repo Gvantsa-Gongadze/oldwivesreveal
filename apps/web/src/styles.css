@@ -171,10 +171,6 @@ body {
   text-align: left;
 }
 
-.date-trigger-placeholder {
-  color: rgba(10, 30, 36, 0.4);
-}
-
 .date-trigger:focus-visible {
   outline: 2px solid var(--blood);
   outline-offset: 3px;
@@ -730,6 +726,12 @@ body {
     grid-template-columns: 1fr;
     aspect-ratio: auto;
     max-width: none;
+  }
+  .field:last-of-type {
+    grid-column: auto;
+    width: auto;
+    max-width: none;
+    justify-self: auto;
   }
 }
 
