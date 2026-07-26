@@ -94,7 +94,10 @@ export function ShareButton({ reveal }: ShareButtonProps) {
     try {
       const blob = await drawShareCard(reveal);
       const shareText = `It's a ${reveal.result}! (according to Old Wives' Reveal)`;
-      const shareUrl = `${window.location.origin}/reveal/${reveal.id}`;
+      // Points at the server-rendered preview page (not the SPA route directly)
+      // so a pasted/posted link shows a rich Open Graph card on platforms that
+      // don't accept an attached file - it redirects real visitors into the app.
+      const shareUrl = `${window.location.origin}/api/reveals/${reveal.id}/share`;
       const nav = navigator as Navigator & {
         canShare?: (data?: ShareData) => boolean;
         share?: (data?: ShareData) => Promise<void>;
