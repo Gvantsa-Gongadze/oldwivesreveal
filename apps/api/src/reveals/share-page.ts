@@ -18,11 +18,11 @@ function escapeHtml(value: string): string {
  * ignore meta-refresh, so they just read the tags below; humans get bounced
  * straight through.
  */
-export function renderSharePage(reveal: Reveal, webOrigin: string): string {
+export function renderSharePage(reveal: Reveal, apiOrigin: string, webOrigin: string): string {
   const title = `${RESULT_TITLE[reveal.result]} — Old Wives' Reveal`;
   const description = "An old wives' method for guessing boy or girl.";
-  const imageUrl = `${webOrigin}/api/reveals/${reveal.id}/card.png`;
-  const pageUrl = `${webOrigin}/api/reveals/${reveal.id}/share`;
+  const imageUrl = `${apiOrigin}/reveals/${reveal.id}/card.png`;
+  const pageUrl = `${apiOrigin}/reveals/${reveal.id}/share`;
   const appUrl = `${webOrigin}/reveal/${reveal.id}`;
 
   return `<!doctype html>

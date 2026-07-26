@@ -23,6 +23,12 @@ services:
       # with an existing one, so this can't be predicted in advance.
       - key: WEB_ORIGIN
         sync: false
+      # This service's own public URL, used to build the og:image/og:url
+      # links on the share page. Not derived from the incoming request
+      # since req.protocol can't be trusted to say https behind Render's
+      # reverse proxy without extra Express config.
+      - key: API_ORIGIN
+        sync: false
 
   - type: web
     name: oldwivesreveal-web

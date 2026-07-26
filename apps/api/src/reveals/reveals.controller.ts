@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Headers, NotFoundException, Param, Post, Query, Res } from '@nestjs/common';
-import type { Response } from 'express';
+import { Body, Controller, Get, Headers, NotFoundException, Param, Post, Query, Req, Res } from '@nestjs/common';
+import type { Request, Response } from 'express';
 import { RevealsService } from './reveals.service';
 import { CreateRevealDto } from './dto/create-reveal.dto';
 import { renderShareCard } from './share-card';
@@ -32,14 +32,19 @@ export class RevealsController {
   }
 
   @Get(':id/share')
-  async getSharePage(@Param('id') id: string, @Res() res: Response) {
+  async getSharePage(@Param('id') id: string, @Req() req: Request, @Res() res: Response) {
     const reveal = await this.revealsService.findOne(id);
     if (!reveal) {
       throw new NotFoundException(`No reveal found with id ${id}`);
     }
     const webOrigin = process.env.WEB_ORIGIN ?? 'http://localhost:5173';
+    // Falls back to the incoming request's own origin for local dev; in
+    // production API_ORIGIN is set explicitly, since req.protocol can't be
+    // trusted to reflect https behind Render's reverse proxy without extra
+    // Express config.
+    const apiOrigin = process.env.API_ORIGIN ?? `${req.protocol}://${req.get('host')}`;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(renderSharePage(reveal, webOrigin));
+    res.send(renderSharePage(reveal, apiOrigin, webOrigin));
   }
 
   @Get(':id')
