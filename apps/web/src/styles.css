@@ -510,6 +510,36 @@ body {
   border-radius: 6px;
 }
 
+.share-button {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
+  color: var(--gold-dim);
+  background: transparent;
+  border: 1.5px solid var(--gold-dim);
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.share-button:hover:not(:disabled) {
+  background: var(--gold-dim);
+  color: var(--parchment);
+  transform: translateY(-1px);
+}
+
+.share-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.share-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .history {
   margin-top: 48px;
 }

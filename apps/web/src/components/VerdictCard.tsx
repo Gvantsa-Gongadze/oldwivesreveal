@@ -1,5 +1,6 @@
 import type { Reveal } from '@oldwivesreveal/shared-types';
 import { formatSinceRenewal } from '../lib/format';
+import { ShareButton } from './ShareButton';
 
 interface VerdictCardProps {
   reveal: Reveal;
@@ -33,6 +34,7 @@ export function VerdictCard({ reveal }: VerdictCardProps) {
       <p className="verdict-eyebrow">The reading</p>
       <h2 className={resultClass}>{result}</h2>
       <pre className="ledger-note">{lines.join('\n')}</pre>
+      <ShareButton reveal={reveal} />
     </section>
   );
 }
