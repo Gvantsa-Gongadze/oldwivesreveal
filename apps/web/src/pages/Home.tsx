@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 import type { Reveal } from '@oldwivesreveal/shared-types';
 import { RevealForm } from '../components/RevealForm';
 import { RevealResult } from '../components/RevealResult';
+import { maybeRequestReview } from '../lib/reviewPrompt';
 
 export function Home() {
   const [reveal, setReveal] = useState<Reveal | null>(null);
+
+  function handleRevealed(next: Reveal) {
+    setReveal(next);
+    void maybeRequestReview();
+  }
 
   return (
     <div className="page">
@@ -24,7 +30,7 @@ export function Home() {
         <Link to="/history">Past reckonings →</Link>
       </nav>
 
-      <RevealForm onRevealed={setReveal} />
+      <RevealForm onRevealed={handleRevealed} />
 
       {reveal ? <RevealResult reveal={reveal} /> : null}
 
