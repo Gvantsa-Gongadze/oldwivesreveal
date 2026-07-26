@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Reveal } from '@oldwivesreveal/shared-types';
 import { RevealForm } from '../components/RevealForm';
-import { CycleDial } from '../components/CycleDial';
-import { VerdictCard } from '../components/VerdictCard';
-import { ResultWindows } from '../components/ResultWindows';
+import { RevealResult } from '../components/RevealResult';
 
 export function Home() {
   const [reveal, setReveal] = useState<Reveal | null>(null);
@@ -28,32 +26,7 @@ export function Home() {
 
       <RevealForm onRevealed={setReveal} />
 
-      {reveal ? (
-        <>
-          <section className="dials">
-            <CycleDial
-              label="Father — 4-year cycle"
-              reading={reveal.father}
-              handColor="var(--father-bright)"
-              wedgeColor="var(--father)"
-              isWinner={reveal.newerParent === 'father'}
-              isDimmed={reveal.newerParent === 'mother'}
-            />
-            <div className="bridge">⇄</div>
-            <CycleDial
-              label="Mother — 3-year cycle"
-              reading={reveal.mother}
-              handColor="var(--mother-bright)"
-              wedgeColor="var(--mother)"
-              isWinner={reveal.newerParent === 'mother'}
-              isDimmed={reveal.newerParent === 'father'}
-            />
-          </section>
-
-          <VerdictCard reveal={reveal} />
-          <ResultWindows reveal={reveal} />
-        </>
-      ) : null}
+      {reveal ? <RevealResult reveal={reveal} /> : null}
 
       <footer className="footnote">
         This follows an old folk method, not medicine. A baby's biological sex is set by chromosomes at conception —

@@ -24,3 +24,8 @@ export async function listReveals(limit = 10): Promise<Reveal[]> {
   const response = await fetch(`${BASE_URL}?limit=${limit}`);
   return parseJsonOrThrow(response);
 }
+
+export async function getReveal(id: string): Promise<Reveal> {
+  const response = await fetch(`${BASE_URL}/${id}`);
+  return parseJsonOrThrow(response);
+}

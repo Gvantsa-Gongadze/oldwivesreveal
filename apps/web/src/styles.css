@@ -531,6 +531,9 @@ body {
   padding: 10px 14px;
   border-bottom: 1px solid rgba(199, 173, 172, 0.2);
   border-radius: 4px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   transition: background 160ms ease, transform 160ms ease;
 }
 
