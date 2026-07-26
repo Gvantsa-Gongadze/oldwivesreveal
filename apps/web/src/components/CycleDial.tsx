@@ -55,7 +55,7 @@ export function CycleDial({ label, reading, handColor, wedgeColor, isWinner, isD
     <div className={`dial-wrap${isWinner ? ' winner' : ''}${isDimmed ? ' dim' : ''}`}>
       <svg viewBox="0 0 200 200">
         <circle className="ring-track" cx="100" cy="100" r="80" />
-        <path className="ring-wedge" d={wedgePath(reading.angleDeg)} fill={wedgeColor} fillOpacity={0.35} />
+        <path d={wedgePath(reading.angleDeg)} fill={wedgeColor} fillOpacity={0.35} />
         <g>
           {ticks.map((t, i) => (
             <line key={i} className="ring-tick" x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} />
