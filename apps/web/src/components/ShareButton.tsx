@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Reveal, RevealResult } from '@oldwivesreveal/shared-types';
+import { BASE_URL } from '../api/reveals';
 
 interface ShareButtonProps {
   reveal: Reveal;
@@ -97,7 +98,7 @@ export function ShareButton({ reveal }: ShareButtonProps) {
       // Points at the server-rendered preview page (not the SPA route directly)
       // so a pasted/posted link shows a rich Open Graph card on platforms that
       // don't accept an attached file - it redirects real visitors into the app.
-      const shareUrl = `${window.location.origin}/api/reveals/${reveal.id}/share`;
+      const shareUrl = `${BASE_URL}/${reveal.id}/share`;
       const nav = navigator as Navigator & {
         canShare?: (data?: ShareData) => boolean;
         share?: (data?: ShareData) => Promise<void>;

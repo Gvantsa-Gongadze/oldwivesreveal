@@ -1,7 +1,12 @@
 import type { CreateRevealRequest, Reveal } from '@oldwivesreveal/shared-types';
 import { getClientId } from '../lib/clientId';
 
-const BASE_URL = '/api/reveals';
+// In local dev, requests go through Vite's proxy at /api (see vite.config.ts),
+// which forwards to the API on the same machine. In production the web app
+// and API are separately hosted, so VITE_API_ORIGIN points straight at the
+// deployed API instead.
+const API_ORIGIN: string = import.meta.env.VITE_API_ORIGIN ?? '';
+export const BASE_URL = API_ORIGIN ? `${API_ORIGIN}/reveals` : '/api/reveals';
 
 async function parseJsonOrThrow(response: Response) {
   const body = await response.json().catch(() => null);

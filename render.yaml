@@ -1,0 +1,45 @@
+databases:
+  - name: oldwivesreveal-db
+    plan: free
+    databaseName: oldwivesreveal
+    user: owr
+
+services:
+  - type: web
+    name: oldwivesreveal-api
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @oldwivesreveal/shared-types build && pnpm --filter api build
+    startCommand: pnpm --filter api start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: DATABASE_URL
+        fromDatabase:
+          name: oldwivesreveal-db
+          property: connectionString
+      # Set this to the deployed web service's real URL once known (see
+      # deploy notes) - Render may suffix the service name if it collides
+      # with an existing one, so this can't be predicted in advance.
+      - key: WEB_ORIGIN
+        sync: false
+
+  - type: web
+    name: oldwivesreveal-web
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @oldwivesreveal/shared-types build && pnpm --filter web build
+    staticPublishPath: apps/web/dist
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      # Set this to the deployed API service's real URL once known (same
+      # caveat as WEB_ORIGIN above). Requires a redeploy after changing,
+      # since Vite bakes env vars in at build time.
+      - key: VITE_API_ORIGIN
+        sync: false
+    routes:
+      # SPA fallback so direct links to /home, /history, /reveal/:id etc.
+      # work instead of 404ing on a static host.
+      - type: rewrite
+        source: /*
+        destination: /index.html
