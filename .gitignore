@@ -7,3 +7,4 @@ build
 .DS_Store
 apps/api/generated
 pnpm-lock.yaml.bak
+.claude/settings.local.json
