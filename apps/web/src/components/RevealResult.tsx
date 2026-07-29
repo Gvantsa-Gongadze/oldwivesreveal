@@ -12,21 +12,21 @@ export function RevealResult({ reveal }: RevealResultProps) {
     <>
       <section className="dials">
         <CycleDial
-          label="Father — 4-year cycle"
-          reading={reveal.father}
-          handColor="var(--father-bright)"
-          wedgeColor="var(--father)"
-          isWinner={reveal.newerParent === 'father'}
-          isDimmed={reveal.newerParent === 'mother'}
-        />
-        <div className="bridge">⇄</div>
-        <CycleDial
           label="Mother — 3-year cycle"
           reading={reveal.mother}
           handColor="var(--mother-bright)"
           wedgeColor="var(--mother)"
           isWinner={reveal.newerParent === 'mother'}
           isDimmed={reveal.newerParent === 'father'}
+        />
+        <div className="bridge">⇄</div>
+        <CycleDial
+          label="Father — 4-year cycle"
+          reading={reveal.father}
+          handColor="var(--father-bright)"
+          wedgeColor="var(--father)"
+          isWinner={reveal.newerParent === 'father'}
+          isDimmed={reveal.newerParent === 'mother'}
         />
       </section>
 

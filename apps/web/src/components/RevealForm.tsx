@@ -43,12 +43,12 @@ export function RevealForm({ onRevealed }: RevealFormProps) {
   return (
     <form className="ledger-card" onSubmit={handleSubmit}>
       <div className="field">
-        <label htmlFor="fatherBirth">Father's birth</label>
-        <DatePicker id="fatherBirth" value={fatherBirthDate} onChange={setFatherBirthDate} />
-      </div>
-      <div className="field">
         <label htmlFor="motherBirth">Mother's birth</label>
         <DatePicker id="motherBirth" value={motherBirthDate} onChange={setMotherBirthDate} />
+      </div>
+      <div className="field">
+        <label htmlFor="fatherBirth">Father's birth</label>
+        <DatePicker id="fatherBirth" value={fatherBirthDate} onChange={setFatherBirthDate} />
       </div>
       <div className="field">
         <label htmlFor="reckonDate">Date to reckon from</label>

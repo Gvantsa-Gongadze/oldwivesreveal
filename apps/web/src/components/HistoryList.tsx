@@ -18,8 +18,8 @@ export function HistoryList() {
       <h3>Past reckonings</h3>
       {data.map((reveal) => (
         <Link className="history-row" to={`/reveal/${reveal.id}`} key={reveal.id}>
-          <span>Father {formatDate(reveal.fatherBirthDate)}</span>
           <span>Mother {formatDate(reveal.motherBirthDate)}</span>
+          <span>Father {formatDate(reveal.fatherBirthDate)}</span>
           <span>Reckoned {formatDate(reveal.reckonDate)}</span>
           <span className={`result-tag ${reveal.result.toLowerCase()}`}>{reveal.result}</span>
         </Link>

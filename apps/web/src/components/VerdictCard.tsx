@@ -10,8 +10,8 @@ export function VerdictCard({ reveal }: VerdictCardProps) {
   const { father, mother, newerParent, motherOlder, result } = reveal;
 
   const lines = [
-    `Father: ${formatSinceRenewal(father.remainderYears)} (of 4)`,
     `Mother: ${formatSinceRenewal(mother.remainderYears)} (of 3)`,
+    `Father: ${formatSinceRenewal(father.remainderYears)} (of 4)`,
     newerParent === 'tie'
       ? '-> Both renew together. Reading is even.'
       : `-> ${newerParent === 'father' ? 'Father' : 'Mother'} is running fresher.`,

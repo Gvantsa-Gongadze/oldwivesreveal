@@ -27,8 +27,8 @@ export function RevealDetail() {
         </h1>
         {reveal ? (
           <p className="lede">
-            Reckoned {formatDate(reveal.reckonDate)} — father born {formatDate(reveal.fatherBirthDate)}, mother born{' '}
-            {formatDate(reveal.motherBirthDate)}.
+            Reckoned {formatDate(reveal.reckonDate)} — mother born {formatDate(reveal.motherBirthDate)}, father born{' '}
+            {formatDate(reveal.fatherBirthDate)}.
           </p>
         ) : null}
       </header>
