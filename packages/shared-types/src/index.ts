@@ -31,6 +31,16 @@ export interface Reveal extends CreateRevealRequest {
   createdAt: string;
 }
 
+/** A Reveal plus the anonymous device id that created it, for the admin listing only. */
+export interface AdminReveal extends Reveal {
+  clientId: string | null;
+}
+
+export interface AdminRevealsResponse {
+  items: AdminReveal[];
+  total: number;
+}
+
 const MS_PER_DAY = 86_400_000;
 const YEAR = 365.2425;
 const FATHER_CYCLE_YEARS = 4;

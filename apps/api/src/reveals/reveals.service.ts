@@ -1,36 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Reveal as RevealRecord } from '@prisma/client';
 import { calculateReveal, type Reveal, type CreateRevealRequest } from '@oldwivesreveal/shared-types';
 import { PrismaService } from '../prisma/prisma.service';
-
-function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
-}
-
-function toReveal(record: RevealRecord): Reveal {
-  return {
-    id: record.id,
-    fatherBirthDate: toIsoDate(record.fatherBirthDate),
-    motherBirthDate: toIsoDate(record.motherBirthDate),
-    reckonDate: toIsoDate(record.reckonDate),
-    father: {
-      remainderYears: record.fatherRemainderYears,
-      cycleYears: 4,
-      angleDeg: record.fatherAngleDeg,
-      ageYears: record.fatherAgeYears,
-    },
-    mother: {
-      remainderYears: record.motherRemainderYears,
-      cycleYears: 3,
-      angleDeg: record.motherAngleDeg,
-      ageYears: record.motherAgeYears,
-    },
-    newerParent: record.newerParent as Reveal['newerParent'],
-    motherOlder: record.motherOlder,
-    result: record.result as Reveal['result'],
-    createdAt: record.createdAt.toISOString(),
-  };
-}
+import { toReveal } from './reveal.mapper';
 
 @Injectable()
 export class RevealsService {
