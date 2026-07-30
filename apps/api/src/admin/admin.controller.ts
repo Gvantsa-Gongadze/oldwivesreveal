@@ -8,7 +8,15 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Get('reveals')
-  findAll(@Query('limit') limit?: string, @Query('offset') offset?: string) {
-    return this.adminService.findAll(limit ? Number(limit) : undefined, offset ? Number(offset) : undefined);
+  findAll(
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string,
+    @Query('motherBirthDate') motherBirthDate?: string,
+    @Query('fatherBirthDate') fatherBirthDate?: string,
+  ) {
+    return this.adminService.findAll(limit ? Number(limit) : undefined, offset ? Number(offset) : undefined, {
+      motherBirthDate,
+      fatherBirthDate,
+    });
   }
 }

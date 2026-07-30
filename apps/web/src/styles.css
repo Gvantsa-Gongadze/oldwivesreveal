@@ -853,6 +853,41 @@ body {
   margin: 24px 0;
 }
 
+.admin-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.admin-filters .field {
+  width: 170px;
+}
+
+.admin-filters .field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* DatePicker's trigger assumes a light parent (--ink-text on transparent);
+   the admin page is dark, so its text/icon need inverting here. */
+.admin-filters .date-trigger {
+  color: var(--parchment);
+}
+
+.admin-filters .date-trigger-icon {
+  color: var(--gold);
+}
+
+.admin-clear-filters {
+  align-self: flex-end;
+  margin-bottom: 1px;
+}
+
 .admin-table-wrap {
   overflow-x: auto;
   border-radius: 8px;

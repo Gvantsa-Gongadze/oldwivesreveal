@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { AdminUnauthorizedError, listAllReveals } from '../api/admin';
 import { clearAdminToken, getAdminToken, setAdminToken } from '../lib/adminAuth';
 import { formatDate, formatDateTime } from '../lib/format';
+import { DatePicker } from '../components/DatePicker';
 
 const PAGE_SIZE = 50;
 
@@ -51,14 +52,35 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 
 function AdminTable() {
   const [offset, setOffset] = useState(0);
+  const [motherBirthDate, setMotherBirthDate] = useState('');
+  const [fatherBirthDate, setFatherBirthDate] = useState('');
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  const filters = { motherBirthDate, fatherBirthDate };
+  const hasFilters = Boolean(motherBirthDate || fatherBirthDate);
+
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['admin-reveals', offset],
-    queryFn: () => listAllReveals(PAGE_SIZE, offset),
+    queryKey: ['admin-reveals', offset, motherBirthDate, fatherBirthDate],
+    queryFn: () => listAllReveals(PAGE_SIZE, offset, filters),
     retry: false,
   });
+
+  function updateMotherFilter(value: string) {
+    setMotherBirthDate(value);
+    setOffset(0);
+  }
+
+  function updateFatherFilter(value: string) {
+    setFatherBirthDate(value);
+    setOffset(0);
+  }
+
+  function clearFilters() {
+    setMotherBirthDate('');
+    setFatherBirthDate('');
+    setOffset(0);
+  }
 
   const unauthorized = error instanceof AdminUnauthorizedError;
 
@@ -88,10 +110,28 @@ function AdminTable() {
         </button>
       </div>
 
+      <div className="admin-filters">
+        <div className="field">
+          <label htmlFor="filter-mother">Mother born</label>
+          <DatePicker id="filter-mother" value={motherBirthDate} onChange={updateMotherFilter} />
+        </div>
+        <div className="field">
+          <label htmlFor="filter-father">Father born</label>
+          <DatePicker id="filter-father" value={fatherBirthDate} onChange={updateFatherFilter} />
+        </div>
+        {hasFilters && (
+          <button type="button" className="admin-logout admin-clear-filters" onClick={clearFilters}>
+            Clear filters
+          </button>
+        )}
+      </div>
+
       {isLoading && <p className="admin-status">Loading…</p>}
       {isError && <p className="error">{(error as Error).message}</p>}
 
-      {data && data.items.length === 0 && <p className="admin-status">No reveals yet.</p>}
+      {data && data.items.length === 0 && (
+        <p className="admin-status">{hasFilters ? 'No reveals match those filters.' : 'No reveals yet.'}</p>
+      )}
 
       {data && data.items.length > 0 && (
         <div className="admin-table-wrap">

@@ -6,9 +6,22 @@ const BASE_URL = API_ORIGIN ? `${API_ORIGIN}/admin` : '/api/admin';
 
 export class AdminUnauthorizedError extends Error {}
 
-export async function listAllReveals(limit: number, offset: number): Promise<AdminRevealsResponse> {
+export interface AdminRevealFilters {
+  motherBirthDate?: string;
+  fatherBirthDate?: string;
+}
+
+export async function listAllReveals(
+  limit: number,
+  offset: number,
+  filters: AdminRevealFilters = {},
+): Promise<AdminRevealsResponse> {
   const token = getAdminToken();
-  const response = await fetch(`${BASE_URL}/reveals?limit=${limit}&offset=${offset}`, {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+  if (filters.motherBirthDate) params.set('motherBirthDate', filters.motherBirthDate);
+  if (filters.fatherBirthDate) params.set('fatherBirthDate', filters.fatherBirthDate);
+
+  const response = await fetch(`${BASE_URL}/reveals?${params}`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
 
