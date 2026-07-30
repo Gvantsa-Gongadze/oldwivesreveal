@@ -24,6 +24,17 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!-- Lets the app reach a plain-HTTP API on the local network (e.g. a
+		     dev machine's LAN IP) without weakening ATS for the wider internet. -->
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<!-- Without this, iOS silently blocks local-network requests (no prompt,
+	     no error) instead of asking the user - required for the dev-LAN API. -->
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Used during development to reach the app's API server on your local network.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
