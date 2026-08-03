@@ -993,3 +993,44 @@ body {
     transform: none;
   }
 }
+
+.legal-page .hero {
+  margin-bottom: 24px;
+}
+
+.legal-body {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.legal-body h2 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  margin: 32px 0 10px;
+}
+
+.legal-body h2:first-child {
+  margin-top: 0;
+}
+
+.legal-body p {
+  margin: 0 0 14px;
+  color: rgba(246, 236, 235, 0.9);
+}
+
+.legal-body ul {
+  margin: 0 0 14px;
+  padding-left: 22px;
+  color: rgba(246, 236, 235, 0.9);
+}
+
+.legal-body li {
+  margin-bottom: 6px;
+}
+
+.legal-body a {
+  color: var(--mother-bright);
+}

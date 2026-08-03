@@ -3,6 +3,7 @@ import { Home } from './pages/Home';
 import { History } from './pages/History';
 import { RevealDetail } from './pages/RevealDetail';
 import { Admin } from './pages/Admin';
+import { Privacy } from './pages/Privacy';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Route path="/history" element={<History />} />
       <Route path="/reveal/:id" element={<RevealDetail />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/privacy" element={<Privacy />} />
     </Routes>
   );
 }
